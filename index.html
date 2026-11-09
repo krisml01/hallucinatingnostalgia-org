@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Hallucinating Nostalgia</title>
+<meta name="description" content="hallucinating nostalgia, practice. The definition, origin and coinage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<style>
+:root{
+  --bg:#232226;
+  --ink:#F3F1EC;
+  --ink-soft:#ABA7A2;
+  --rule:#3A383E;
+  --accent:#9A86EE;
+  --accent-deep:#6B4FD8;
+  --cyan:#1FB8BD;
+  --tip-bg:#141316;
+  --tip-ink:#F3F1EC;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  font-weight:400;
+  font-size:21px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+main{
+  width:100%;
+  max-width:720px;
+  margin:0 auto;
+  padding:clamp(48px,10vh,120px) 24px clamp(48px,8vh,96px);
+  flex:1;
+}
+.mark{
+  display:block;
+  width:min(132px,34vw);
+  margin:0 0 clamp(36px,6vh,60px);
+  text-decoration:none;
+}
+.mark img{display:block;width:100%;height:auto}
+.mark:focus-visible{outline:1px solid var(--accent);outline-offset:12px}
+
+.epigraph{
+  margin:0 0 clamp(52px,8vh,88px);
+  padding:0;
+  border:0;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(25px,3.8vw,34px);
+  line-height:1.2;
+  letter-spacing:-0.005em;
+  color:var(--ink);
+  max-width:640px;
+}
+.epigraph p{margin:0 0 14px}
+.epigraph p::before{content:'\201C';color:var(--accent);margin-left:-0.45em;margin-right:0.02em}
+.epigraph p::after{content:'\201D';color:var(--accent)}
+.epigraph cite{display:block;text-align:right;font-style:normal;font-size:17px;letter-spacing:0.02em;color:var(--ink-soft)}
+.epigraph cite::before{content:'\2014\00a0';color:var(--accent)}
+
+.entry{margin:0 0 clamp(44px,7vh,72px)}
+.entry:last-of-type{margin-bottom:0}
+.headword{
+  font-weight:300;
+  font-size:clamp(40px,7.2vw,64px);
+  line-height:1.02;
+  letter-spacing:-0.012em;
+  margin:0 0 12px;
+}
+.headword.secondary{font-size:clamp(30px,5.2vw,42px)}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:8px 18px;
+  margin:0 0 24px;
+  font-size:23px;
+  color:var(--ink-soft);
+}
+.pron{
+  font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  font-weight:300;
+  font-size:18px;
+  color:var(--accent);
+  letter-spacing:0.02em;
+}
+.pos{font-style:italic}
+.pos b{font-style:normal;font-weight:500;color:var(--cyan)}
+.def p{margin:0 0 1em}
+.def p:last-child{margin-bottom:0}
+.def em{font-style:italic}
+.def strong{font-weight:700;color:var(--ink)}
+
+/* tooltips */
+.tip{
+  position:relative;
+  border-bottom:1px dotted var(--accent);
+  cursor:help;
+  text-decoration:none;
+  color:inherit;
+}
+.tip:hover,.tip:focus-visible{border-bottom-style:solid;outline:none}
+.tip::after{
+  content:attr(data-tip);
+  position:absolute;
+  left:0;
+  bottom:calc(100% + 10px);
+  z-index:2;
+  width:min(360px,80vw);
+  padding:12px 14px;
+  background:var(--tip-bg);
+  color:var(--tip-ink);
+  border:1px solid var(--rule);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:normal;
+  font-weight:400;
+  font-size:17px;
+  line-height:1.4;
+  white-space:pre-line;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(4px);
+  transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;
+  pointer-events:none;
+}
+.tip:hover::after,.tip:focus-visible::after{
+  opacity:1;visibility:visible;transform:translateY(0);
+  transition:opacity .18s ease,transform .18s ease,visibility 0s;
+}
+.tip.right::after{left:auto;right:0}
+@media (hover:none){
+  .tip::after{position:static;display:none}
+  .tip:focus::after{display:block;margin-top:8px;opacity:1;visibility:visible;transform:none}
+}
+
+.rule{border:0;border-top:1px solid var(--rule);margin:clamp(40px,6vh,64px) 0}
+
+dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:10px 24px;font-size:19px}
+dt{color:var(--ink-soft);font-style:italic;font-weight:300}
+dd{margin:0}
+dd i{font-style:italic}
+dd .origin{margin:0 0 10px}
+dd .origin:last-child{margin-bottom:0}
+dd .word{font-style:italic;font-weight:500;color:var(--ink);margin-right:6px}
+@media (max-width:480px){dl{grid-template-columns:1fr;gap:4px 0}dt{margin-top:10px}}
+
+.cite{
+  margin-top:clamp(40px,6vh,64px);
+  font-size:18px;
+  color:var(--ink-soft);
+}
+.cite .name{color:var(--ink);font-weight:500}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<main>
+
+  <a class="mark" href="https://hallucinatingnostalgia.com" aria-label="Hallucinating Nostalgia">
+    <img src="hn-mark.svg" alt="hn." width="1315" height="840">
+  </a>
+
+  <blockquote class="epigraph">
+    <p>The real opposite of nostalgia is psychedelic, the reverse of remembering is hallucinating.</p>
+    <cite>Leslie Fiedler, 1968</cite>
+  </blockquote>
+
+  <section class="entry">
+    <h1 class="headword">hallucinating nostalgia</h1>
+    <p class="meta">
+      <span class="pron">/həˌluːsɪˈneɪtɪŋ nɒˈstældʒə/</span>
+      <span class="pos"><b>practice</b></span>
+    </p>
+    <div class="def">
+      <p>The deliberate inducing of nostalgia for a time one never lived. One takes an artefact of that time, functioning or restorable, a vinyl record or a film camera perhaps; <strong>operating it is the dose.</strong> The hallucination comes on with use: one goes back to a time one was never in, and re-enacts a memory one never had.</p>
+      <p><span class="tip" tabindex="0" data-tip="Nostalgia in the everyday sense: a bittersweet longing for one's own past, triggered by a smell, a song, a place. Hofer coined it in 1688 as a medical condition, homesickness severe enough to kill; by the twentieth century it had softened into a mood. Personal nostalgia in Stern's terms.">Ordinary nostalgia</span> is for a past one lived, and it tends to arrive uninvited. Hallucinatory nostalgia is for a past one never lived, and one brings it on. The agency is the difference.</p>
+      <p>The practice is <span class="tip" tabindex="0" data-tip="Devolution here is going backwards in the tool to go forwards in the work. It is deliberate and chosen, the opposite of decline, and it is productive because something gets made with it.">pragmatic, productive devolution</span>: <strong>making a better present out of elements of the past, not out of the past itself.</strong> The connection runs through a kind of <span class="tip" tabindex="0" data-tip="Experimental archaeology is the discipline of learning about the past by doing what people did: building the tools, using the methods, living the process. Here the artefacts themselves are the record, and operating them is how it is read.">experimental archaeology</span>: functioning artefacts as history books one can operate.</p>
+      <p>The stance is an <span class="tip" tabindex="0" data-tip="Disillusioned with the frictionlessness of present-day technology: streaming, where any record is a tap away, against the record itself. Friction and the wait were part of how many analogue tools worked; their digital successors designed them out.&#10;&#10;Optimistic because the practice does something about it rather than mourning. Plain nostalgia keeps only the longing; hauntology keeps only the disillusionment; this holds both and acts.">optimistic disillusionment</span>. The memory isn't one's own and the picture may not be accurate; the technology and the access are real, and one trusts the pull.</p>
+    </div>
+  </section>
+
+  <section class="entry">
+    <h2 class="headword secondary">hallucinatory nostalgia</h2>
+    <p class="meta">
+      <span class="pron">/həˈluːsɪnəˌtɔːri nɒˈstældʒə/</span>
+      <span class="pos"><b>practice</b>, the concept; open to anyone</span>
+    </p>
+    <div class="def">
+      <p>The same practice, named rather than done. The adjective describes it; the agent performs it.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <dl>
+    <dt>origin</dt>
+    <dd>
+      <p class="origin"><span class="word">alucinari</span> Latin, to wander in the mind. Gives <i>hallucinate</i>.</p>
+      <p class="origin"><span class="word">nostos</span> Greek, homecoming.</p>
+      <p class="origin"><span class="word">algos</span> Greek, pain. With <i>nostos</i> gives <i>nostalgia</i>, coined by Johannes Hofer in 1688 as a disease of the imagination.</p>
+    </dd>
+    <dt>related</dt>
+    <dd><span class="tip" tabindex="0" data-tip="Anemoia: nostalgia for a time one has never known. John Koenig, The Dictionary of Obscure Sorrows, 2013. Names the feeling only; says nothing about what to do with it.">anemoia</span> (Koenig, 2013); <span class="tip" tabindex="0" data-tip="Historical nostalgia: longing for a period before one's own birth, known through media and culture, as distinct from personal nostalgia for one's own lived past. Barbara Stern, 1992, in advertising research.">historical nostalgia</span> (Stern, 1992); <span class="tip" tabindex="0" data-tip="Vicarious nostalgia: nostalgia experienced second-hand, through other people's accounts or through objects, for a time one did not live. Christina Goulding, 2002, consumer research.">vicarious nostalgia</span> (Goulding, 2002); <span class="tip right" tabindex="0" data-tip="Hauntology: Mark Fisher, after Derrida. Not longing for the past but for the futures the past promised and never delivered; a culture haunted by what did not happen. Mournful by temperament. Ghosts of My Life, 2014.">hauntology</span> (Fisher, 2014). None names the practice.</dd>
+  </dl>
+
+  <p class="cite">Coined 21 October 2026 by <span class="name">Matthias Kristensen</span>.</p>
+
+</main>
+</body>
+</html>
